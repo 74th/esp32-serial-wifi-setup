@@ -93,3 +93,7 @@ pip-delete-this-directory.txt
 sdkconfig
 sdkconfig.old
 sdkconfig.defaults.*
+
+.env
+.envrc
+.vite
