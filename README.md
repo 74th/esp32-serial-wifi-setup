@@ -13,9 +13,13 @@ ESP32でJSON-RPC プロトコルを使ってシリアル通信経由でWiFi設�
 
 ### Arduino IDE
 
-1. このリポジトリをZIPでダウンロード
-2. Arduino IDE で「スケッチ」→「ライブラリをインクルード」→「.ZIP形式のライブラリをインストール」
-3. ダウンロードしたZIPファイルを選択
+1. ArduinoJsonライブラリをインストール
+   - Arduino IDE で「ツール」→「ライブラリを管理」
+   - 検索欄に「ArduinoJson」と入力
+   - Benoit Blanchon作の「ArduinoJson」をインストール（バージョン7.x）
+2. このリポジトリをZIPでダウンロード
+3. Arduino IDE で「スケッチ」→「ライブラリをインクルード」→「.ZIP形式のライブラリをインストール」
+4. ダウンロードしたZIPファイルを選択
 
 ### PlatformIO
 
