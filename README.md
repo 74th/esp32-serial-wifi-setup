@@ -13,13 +13,11 @@ ESP32でJSON-RPC プロトコルを使ってシリアル通信経由でWiFi設�
 
 ### Arduino IDE
 
-1. ArduinoJsonライブラリをインストール
-   - Arduino IDE で「ツール」→「ライブラリを管理」
-   - 検索欄に「ArduinoJson」と入力
-   - Benoit Blanchon作の「ArduinoJson」をインストール（バージョン7.x）
-2. このリポジトリをZIPでダウンロード
-3. Arduino IDE で「スケッチ」→「ライブラリをインクルード」→「.ZIP形式のライブラリをインストール」
-4. ダウンロードしたZIPファイルを選択
+1. このリポジトリをZIPでダウンロード
+2. Arduino IDE で「スケッチ」→「ライブラリをインクルード」→「.ZIP形式のライブラリをインストール」
+3. ダウンロードしたZIPファイルを選択
+
+依存関係（ArduinoJson）は自動的にインストールされます。
 
 ### PlatformIO
 
@@ -28,7 +26,6 @@ ESP32でJSON-RPC プロトコルを使ってシリアル通信経由でWiFi設�
 ```ini
 lib_deps =
     https://github.com/74th/esp32-serial-wifi-setup.git
-    bblanchon/ArduinoJson@^7
 ```
 
 ## 使用方法
@@ -103,6 +100,11 @@ void loop() {
 {"jsonrpc": "2.0", "id": 1, "result": {"mac_address": "A0:76:4E:B3:67:DC"}}
 ```
 
+## 制限事項
+
+- **改行コード**: JSON-RPCコマンドの送信時は、CRLF（`\r\n`）の改行コードのみ対応しています
+- **ボーレート**: シリアル通信のボーレートは115200固定です
+
 ## API リファレンス
 
 ### `WiFiSetupManager`
@@ -129,7 +131,7 @@ MACアドレスを文字列で返します。
 
 ## 依存関係
 
-- ArduinoJson (バージョン 7.x)
+- ArduinoJson (バージョン 7.x) - 自動的にインストールされます
 - ESP32 Arduino Core
 
 ## ライセンス
