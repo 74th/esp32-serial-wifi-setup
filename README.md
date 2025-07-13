@@ -52,18 +52,13 @@ void loop() {
 #### WiFi認証情報の設定
 
 ```json
-{
-  "jsonrpc": "2.0",
-  "method": "set_wifi_creds",
-  "params": { "ssid": "your_wifi_ssid", "pass": "your_password" },
-  "id": 1
-}
+{"jsonrpc": "2.0", "method": "set_wifi_creds", "params": {"ssid": "your_wifi_ssid", "pass": "your_password"}, "id": 1}
 ```
 
 応答:
 
 ```json
-{ "jsonrpc": "2.0", "id": 1, "result": "ok" }
+{"jsonrpc": "2.0", "id": 1, "result": "ok"}
 ```
 
 **注意**: 設定後、ESP32は自動的に再起動します。
@@ -71,41 +66,37 @@ void loop() {
 #### WiFi認証情報の取得
 
 ```json
-{ "jsonrpc": "2.0", "method": "get_wifi_creds", "id": 1 }
+{"jsonrpc": "2.0", "method": "get_wifi_creds", "id": 1}
 ```
 
 応答:
 
 ```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": { "ssid": "your_wifi_ssid", "pass": "your_password" }
-}
+{"jsonrpc": "2.0", "id": 1, "result": {"ssid": "your_wifi_ssid", "pass": "your_password"}}
 ```
 
 #### IPアドレスの取得
 
 ```json
-{ "jsonrpc": "2.0", "method": "get_ip", "id": 1 }
+{"jsonrpc": "2.0", "method": "get_ip", "id": 1}
 ```
 
 応答:
 
 ```json
-{ "jsonrpc": "2.0", "id": 1, "result": { "ip": "192.168.1.109" } }
+{"jsonrpc": "2.0", "id": 1, "result": {"ip": "192.168.1.109"}}
 ```
 
 #### MACアドレスの取得
 
 ```json
-{ "jsonrpc": "2.0", "method": "get_mac_address", "id": 1 }
+{"jsonrpc": "2.0", "method": "get_mac_address", "id": 1}
 ```
 
 応答:
 
 ```json
-{ "jsonrpc": "2.0", "id": 1, "result": { "mac_address": "A0:76:4E:B3:67:DC" } }
+{"jsonrpc": "2.0", "id": 1, "result": {"mac_address": "A0:76:4E:B3:67:DC"}}
 ```
 
 ## API リファレンス
