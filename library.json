@@ -1,5 +1,5 @@
 {
-  "name": "ESP32 Serial WiFi Setup",
+  "name": "ESP32SerialWiFiSetup",
   "version": "1.0.0",
   "description": "Easy WiFi setup for ESP32 via serial communication. A lightweight library that allows ESP32 to configure WiFi credentials through serial communication.",
   "keywords": ["esp32", "arduino", "wifi", "serial", "setup", "configuration"],
