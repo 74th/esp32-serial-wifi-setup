@@ -1,0 +1,25 @@
+#######################################
+# Syntax Coloring Map For ESP32 Serial WiFi Setup
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+Esp32SerialWifiSetup	KEYWORD1
+WiFiSetupManager	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+setupWiFi	KEYWORD2
+isConnected	KEYWORD2
+getSSID	KEYWORD2
+getIPAddress	KEYWORD2
+resetWiFi	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################

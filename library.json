@@ -1,0 +1,27 @@
+{
+  "name": "ESP32 Serial WiFi Setup",
+  "version": "1.0.0",
+  "description": "Easy WiFi setup for ESP32 via serial communication. A lightweight library that allows ESP32 to configure WiFi credentials through serial communication.",
+  "keywords": ["esp32", "arduino", "wifi", "serial", "setup", "configuration"],
+  "license": "MIT",
+  "homepage": "https://github.com/74th/esp32-serial-wifi-setup",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/74th/esp32-serial-wifi-setup.git"
+  },
+  "frameworks": ["arduino"],
+  "platforms": ["espressif32"],
+  "authors": [
+    {
+      "name": "Atsushi Morimoto",
+      "email": "74th@nnyn.dev",
+      "maintainer": true
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "ArduinoJson",
+      "version": "^7"
+    }
+  ]
+}
