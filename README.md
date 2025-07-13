@@ -54,7 +54,7 @@ void loop() {
 
 ブラウザからWebUSB Serial APIを使用してWiFi設定を行うことができます：
 
-**🌐 [https://esp32-serial-wifi-setup](https://esp32-serial-wifi-setup) にアクセス**
+**🌐 [https://esp32-serial-wifi-setup.74th.tech](https://esp32-serial-wifi-setup.74th.tech) にアクセス**
 
 Webインターフェースの特徴：
 - ブラウザから直接ESP32に接続（WebUSB Serial API使用）
