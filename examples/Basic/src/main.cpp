@@ -2,41 +2,48 @@
 
 Esp32SerialWifiSetup::WiFiSetupManager wifiSetup;
 
-void setup() {
+void setup()
+{
     // Initialize the WiFi setup manager
     wifiSetup.begin();
-    
-    // Start WiFi setup process
-    Serial.println("Starting WiFi setup...");
-    Serial.println("Please open Serial Monitor and enter your WiFi credentials.");
-    
-    if (wifiSetup.setupWiFi()) {
-        Serial.println("WiFi setup completed successfully!");
-        Serial.print("Connected to: ");
-        Serial.println(wifiSetup.getSSID());
-        Serial.print("IP Address: ");
-        Serial.println(wifiSetup.getIPAddress());
-    } else {
-        Serial.println("WiFi setup failed. Please try again.");
-    }
+
+    Serial.println("ESP32 Serial WiFi Setup - JSON-RPC Interface");
+    Serial.println("============================================");
+    Serial.println("Send JSON-RPC commands to configure WiFi:");
+    Serial.println();
+    Serial.println("Set WiFi credentials:");
+    Serial.println("{\"jsonrpc\": \"2.0\", \"method\": \"set_wifi_creds\", \"params\": {\"ssid\": \"your_ssid\", \"pass\": \"your_password\"}, \"id\":1}");
+    Serial.println();
+    Serial.println("Get WiFi credentials:");
+    Serial.println("{\"jsonrpc\": \"2.0\", \"method\": \"get_wifi_creds\", \"id\":1}");
+    Serial.println();
+    Serial.println("Get IP address:");
+    Serial.println("{\"jsonrpc\": \"2.0\", \"method\": \"get_ip\", \"id\":1}");
+    Serial.println();
+    Serial.println("Get MAC address:");
+    Serial.println("{\"jsonrpc\": \"2.0\", \"method\": \"get_mac_address\", \"id\":1}");
+    Serial.println();
 }
 
-void loop() {
-    // Check WiFi connection status every 10 seconds
-    static unsigned long lastCheck = 0;
-    
-    if (millis() - lastCheck > 10000) {
-        lastCheck = millis();
-        
-        if (wifiSetup.isConnected()) {
-            Serial.println("WiFi is still connected");
-            Serial.print("IP: ");
+void loop()
+{
+    // Handle JSON-RPC commands from serial port
+    wifiSetup.handleSerialCommands();
+
+    // Optional: Print connection status every 30 seconds
+    static unsigned long lastStatusPrint = 0;
+    if (millis() - lastStatusPrint > 30000)
+    {
+        lastStatusPrint = millis();
+
+        if (wifiSetup.isConnected())
+        {
+            Serial.print("Status: Connected to WiFi - IP: ");
             Serial.println(wifiSetup.getIPAddress());
-        } else {
-            Serial.println("WiFi connection lost!");
-            // You can call wifiSetup.setupWiFi() again here if needed
+        }
+        else
+        {
+            Serial.println("Status: Not connected to WiFi");
         }
     }
-    
-    delay(1000);
 }

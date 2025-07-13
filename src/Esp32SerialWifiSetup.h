@@ -3,9 +3,18 @@
 #include <Arduino.h>
 #include <WiFi.h>
 #include <ArduinoJson.h>
+#include <esp_system.h>
+#include "nvs_flash.h"
 
 namespace Esp32SerialWifiSetup
 {
+    typedef struct
+    {
+        char ssid_len;
+        char ssid[32];
+        char pass_len;
+        char pass[64];
+    } wifi_credentials_t;
 
     class WiFiSetupManager
     {
@@ -13,16 +22,15 @@ namespace Esp32SerialWifiSetup
         WiFiSetupManager();
 
         /**
-         * Initialize the WiFi setup manager
-         * @param timeout_ms Timeout for waiting user input (default: 30000ms)
+         * Initialize the WiFi setup manager and try to connect with saved credentials
          */
-        void begin(unsigned long timeout_ms = 30000);
+        void begin();
 
         /**
-         * Start WiFi setup process via serial communication
-         * @return true if WiFi connected successfully, false otherwise
+         * Handle JSON-RPC commands from serial port
+         * Call this function in your main loop
          */
-        bool setupWiFi();
+        void handleSerialCommands();
 
         /**
          * Check if WiFi is connected
@@ -31,30 +39,26 @@ namespace Esp32SerialWifiSetup
         bool isConnected();
 
         /**
-         * Get current WiFi SSID
-         * @return SSID string
-         */
-        String getSSID();
-
-        /**
          * Get current WiFi IP address
          * @return IP address as string
          */
         String getIPAddress();
 
         /**
-         * Reset WiFi credentials and restart setup
+         * Get current WiFi MAC address
+         * @return MAC address as string
          */
-        void resetWiFi();
+        String getMacAddress();
 
     private:
-        unsigned long _timeout;
-        String _ssid;
-        String _password;
+        char read_line_buf[1024];
+        int read_line_buf_pos;
 
-        bool _waitForSerialInput();
-        void _printWiFiStatus();
-        void _scanNetworks();
+        uint32_t readLine(char *buf);
+        void handleJsonRpc();
+        void connectToWiFi();
+        void saveWiFiCredentials(const char *ssid, const char *pass);
+        void loadWiFiCredentials(wifi_credentials_t &creds);
     };
 
 } // namespace Esp32SerialWifiSetup
