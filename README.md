@@ -1,40 +1,42 @@
 # ESP32 Serial WiFi Setup
 
-ESP32でJSON-RPC プロトコルを使ってシリアル通信経由でWiFi設定を行うためのライブラリです。
+*[日本語版 (Japanese Version)](README_ja.md)*
 
-## 特徴
+A library for ESP32 that enables WiFi configuration via serial communication using JSON-RPC protocol.
 
-- JSON-RPC 2.0プロトコルによるWiFi設定
-- NVS（Non-Volatile Storage）を使用した設定の永続化
-- シンプルで使いやすいAPI
-- Arduino IDEとPlatformIOの両方に対応
+## Features
 
-## インストール
+- WiFi configuration using JSON-RPC 2.0 protocol
+- Persistent settings using NVS (Non-Volatile Storage)
+- Simple and easy-to-use API
+- Compatible with both Arduino IDE and PlatformIO
+
+## Installation
 
 ### Arduino IDE
 
-1. ArduinoJsonライブラリをインストール
-   - Arduino IDE で「ツール」→「ライブラリを管理」
-   - 検索欄に「ArduinoJson」と入力
-   - Benoit Blanchon作の「ArduinoJson」をインストール（バージョン7.x）
-2. このリポジトリをZIPでダウンロード
-3. Arduino IDE で「スケッチ」→「ライブラリをインクルード」→「.ZIP形式のライブラリをインストール」
-4. ダウンロードしたZIPファイルを選択
+1. Install ArduinoJson library
+   - In Arduino IDE, go to "Tools" → "Manage Libraries"
+   - Search for "ArduinoJson"
+   - Install "ArduinoJson" by Benoit Blanchon (version 7.x)
+2. Download this repository as ZIP
+3. In Arduino IDE, go to "Sketch" → "Include Library" → "Add .ZIP Library"
+4. Select the downloaded ZIP file
 
-依存関係（ArduinoJson）は自動的にインストールされます。
+Dependencies (ArduinoJson) will be installed automatically.
 
 ### PlatformIO
 
-`platformio.ini` に以下を追加：
+Add the following to your `platformio.ini`:
 
 ```ini
 lib_deps =
     https://github.com/74th/esp32-serial-wifi-setup.git
 ```
 
-## 使用方法
+## Usage
 
-### 基本的な使い方
+### Basic Usage
 
 ```cpp
 #include <Esp32SerialWifiSetup.h>
@@ -50,115 +52,115 @@ void loop() {
 }
 ```
 
-### Web インターフェース
+### Web Interface
 
-ブラウザからWebUSB Serial APIを使用してWiFi設定を行うことができます：
+You can configure WiFi settings from your browser using WebUSB Serial API:
 
-**🌐 [https://esp32-serial-wifi-setup.74th.tech](https://esp32-serial-wifi-setup.74th.tech) にアクセス**
+**🌐 Visit [https://esp32-serial-wifi-setup.74th.tech](https://esp32-serial-wifi-setup.74th.tech)**
 
-Webインターフェースの特徴：
-- ブラウザから直接ESP32に接続（WebUSB Serial API使用）
-- WiFi認証情報（SSID/パスワード）の設定
-- リアルタイムでのシリアル通信モニタリング
-- IPアドレスとMACアドレスの取得
-- 追加ソフトウェアのインストール不要
+Web interface features:
+- Direct connection to ESP32 from browser (using WebUSB Serial API)
+- WiFi credentials configuration (SSID/Password)
+- Real-time serial communication monitoring
+- IP address and MAC address retrieval
+- No additional software installation required
 
-**必要要件:**
-- Chrome/Edge等のWebUSB対応ブラウザ
-- HTTPS接続（必須）
+**Requirements:**
+- WebUSB-compatible browser (Chrome/Edge, etc.)
+- HTTPS connection (required)
 
-### JSON-RPC コマンド
+### JSON-RPC Commands
 
-シリアルポートに以下のJSON-RPCコマンドを送信してWiFiを設定します：
+Configure WiFi by sending the following JSON-RPC commands to the serial port:
 
-#### WiFi認証情報の設定
+#### Set WiFi Credentials
 
 ```json
 {"jsonrpc": "2.0", "method": "set_wifi_creds", "params": {"ssid": "your_wifi_ssid", "pass": "your_password"}, "id": 1}
 ```
 
-応答:
+Response:
 
 ```json
 {"jsonrpc": "2.0", "id": 1, "result": "ok"}
 ```
 
-**注意**: 設定後、ESP32は自動的に再起動します。
+**Note**: The ESP32 will automatically restart after setting credentials.
 
-#### WiFi認証情報の取得
+#### Get WiFi Credentials
 
 ```json
 {"jsonrpc": "2.0", "method": "get_wifi_creds", "id": 1}
 ```
 
-応答:
+Response:
 
 ```json
 {"jsonrpc": "2.0", "id": 1, "result": {"ssid": "your_wifi_ssid", "pass": "your_password"}}
 ```
 
-#### IPアドレスの取得
+#### Get IP Address
 
 ```json
 {"jsonrpc": "2.0", "method": "get_ip", "id": 1}
 ```
 
-応答:
+Response:
 
 ```json
 {"jsonrpc": "2.0", "id": 1, "result": {"ip": "192.168.1.109"}}
 ```
 
-#### MACアドレスの取得
+#### Get MAC Address
 
 ```json
 {"jsonrpc": "2.0", "method": "get_mac_address", "id": 1}
 ```
 
-応答:
+Response:
 
 ```json
 {"jsonrpc": "2.0", "id": 1, "result": {"mac_address": "A0:76:4E:B3:67:DC"}}
 ```
 
-## 制限事項
+## Limitations
 
-- **改行コード**: JSON-RPCコマンドの送信時は、CRLF（`\r\n`）の改行コードのみ対応しています
-- **ボーレート**: シリアル通信のボーレートは115200固定です
+- **Line Endings**: Only CRLF (`\r\n`) line endings are supported when sending JSON-RPC commands
+- **Baud Rate**: Serial communication baud rate is fixed at 115200
 
-## API リファレンス
+## API Reference
 
 ### `WiFiSetupManager`
 
 #### `void begin()`
 
-ライブラリを初期化し、保存されたWiFi認証情報があれば自動的に接続を試行します。
+Initializes the library and automatically attempts to connect using saved WiFi credentials if available.
 
 #### `void handleSerialCommands()`
 
-シリアルポートからのJSON-RPCコマンドを処理します。メインループで継続的に呼び出してください。
+Processes JSON-RPC commands from the serial port. Call this continuously in your main loop.
 
 #### `bool isConnected()`
 
-WiFi接続状態を返します。
+Returns the WiFi connection status.
 
 #### `String getIPAddress()`
 
-現在のIPアドレスを文字列で返します。
+Returns the current IP address as a string.
 
 #### `String getMacAddress()`
 
-MACアドレスを文字列で返します。
+Returns the MAC address as a string.
 
-## 依存関係
+## Dependencies
 
-- ArduinoJson (バージョン 7.x)
+- ArduinoJson (version 7.x)
 - ESP32 Arduino Core
 
-## ライセンス
+## License
 
 MIT License
 
-## 貢献
+## Contributing
 
-バグ報告や機能要求は、GitHubのIssuesでお知らせください。
+Please report bugs and feature requests through GitHub Issues.
