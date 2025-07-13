@@ -4,6 +4,7 @@ import { ngrok } from 'vite-plugin-ngrok'
 const NGROK_AUTH_TOKEN = process.env.NGROK_AUTH_TOKEN || '';
 
 export default defineConfig({
+  base: '/',
   plugins: [react(),
   ngrok({
     authtoken: NGROK_AUTH_TOKEN,
