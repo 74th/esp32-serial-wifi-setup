@@ -175,98 +175,102 @@ export default function App() {
 
   // --- ui -----------------------------------------------------------------
   return (
-    <div className="flex flex-col items-center p-6 space-y-4 font-sans">
-      <h1 className="text-3xl font-bold">Web Serial Wifi Setup</h1>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="container mx-auto px-6 py-8 max-w-4xl">
+        <div className="flex flex-col items-center space-y-6">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Web Serial WiFi Setup</h1>
 
-      <div className="space-x-2">
-        <button
-          onClick={connected ? disconnect : connect}
-          className="px-4 py-2 rounded-lg shadow text-white bg-blue-600 disabled:opacity-50"
-        >
-          {connected ? "Disconnect" : "Connect"}
-        </button>
-        <button
-          onClick={getIp}
-          disabled={!connected}
-          className="px-4 py-2 rounded-lg shadow text-white bg-indigo-600 disabled:opacity-50"
-        >
-          Get IP
-        </button>
-        <button
-          onClick={getMacAddress}
-          disabled={!connected}
-          className="px-4 py-2 rounded-lg shadow text-white bg-purple-600 disabled:opacity-50"
-        >
-          Get MAC Address
-        </button>
-      </div>
-      <div className="w-full max-w-2xl text-left text-base text-black bg-gray-100 rounded p-2">
-        <span className="font-bold">IP Address: </span>
-        <span>{ip ?? "-"}</span>
-      </div>
-      <div className="w-full max-w-2xl text-left text-base text-black bg-gray-100 rounded p-2">
-        <span className="font-bold">MAC Address: </span>
-        <span>{macAddress ?? "-"}</span>
-      </div>
-
-      <div className="w-full max-w-2xl flex space-x-2 items-center">
-        <input
-          className="flex-grow border rounded-lg p-2 bg-gray-800 text-white placeholder-gray-500 focus:outline-none"
-          type="text"
-          placeholder="SSID"
-          value={ssid}
-          onChange={(e) => setSsid(e.target.value)}
-          disabled={!connected}
-        />
-        <input
-          className="flex-grow border rounded-lg p-2 bg-gray-800 text-white placeholder-gray-500 focus:outline-none"
-          type="password"
-          placeholder="Password"
-          value={wifiPass}
-          onChange={(e) => setWifiPass(e.target.value)}
-          disabled={!connected}
-        />
-        <button
-          onClick={setWifiCreds}
-          disabled={!connected || !ssid}
-          className="px-4 py-2 rounded-lg shadow text-white bg-orange-600 disabled:opacity-50"
-        >
-          Set WiFi
-        </button>
-      </div>
-      <div
-        ref={logRef}
-        className="w-full max-w-2xl h-64 overflow-y-auto rounded-lg bg-gray-900 text-green-400 font-mono text-sm p-3 shadow-inner"
-      >
-        {log.map((l, i) => (
-          <div key={i} className="whitespace-pre-wrap break-words">
-            {l}
+          <div className="space-x-2">
+            <button
+              onClick={connected ? disconnect : connect}
+              className="px-4 py-2 rounded-lg shadow text-white bg-blue-600 disabled:opacity-50"
+            >
+              {connected ? "Disconnect" : "Connect"}
+            </button>
+            <button
+              onClick={getIp}
+              disabled={!connected}
+              className="px-4 py-2 rounded-lg shadow text-white bg-indigo-600 disabled:opacity-50"
+            >
+              Get IP
+            </button>
+            <button
+              onClick={getMacAddress}
+              disabled={!connected}
+              className="px-4 py-2 rounded-lg shadow text-white bg-purple-600 disabled:opacity-50"
+            >
+              Get MAC Address
+            </button>
           </div>
-        ))}
-      </div>
+          <div className="w-full max-w-2xl text-left text-base text-gray-900 dark:text-gray-100 bg-gray-100 dark:bg-gray-800 rounded p-2">
+            <span className="font-bold">IP Address: </span>
+            <span>{ip ?? "-"}</span>
+          </div>
+          <div className="w-full max-w-2xl text-left text-base text-gray-900 dark:text-gray-100 bg-gray-100 dark:bg-gray-800 rounded p-2">
+            <span className="font-bold">MAC Address: </span>
+            <span>{macAddress ?? "-"}</span>
+          </div>
 
-      <div className="w-full max-w-2xl flex space-x-2">
-        <input
-          className="flex-grow border rounded-lg p-2 bg-gray-800 text-white placeholder-gray-500 focus:outline-none"
-          type="text"
-          placeholder="Type a command…"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              send();
-            }
-          }}
-          disabled={!connected}
-        />
-        <button
-          onClick={send}
-          disabled={!connected || !input.trim()}
-          className="px-4 py-2 rounded-lg shadow text-white bg-green-600 disabled:opacity-50"
-        >
-          Send
-        </button>
+          <div className="w-full max-w-2xl flex space-x-2 items-center">
+            <input
+              className="flex-grow border rounded-lg p-2 bg-gray-800 text-white placeholder-gray-500 focus:outline-none"
+              type="text"
+              placeholder="SSID"
+              value={ssid}
+              onChange={(e) => setSsid(e.target.value)}
+              disabled={!connected}
+            />
+            <input
+              className="flex-grow border rounded-lg p-2 bg-gray-800 text-white placeholder-gray-500 focus:outline-none"
+              type="password"
+              placeholder="Password"
+              value={wifiPass}
+              onChange={(e) => setWifiPass(e.target.value)}
+              disabled={!connected}
+            />
+            <button
+              onClick={setWifiCreds}
+              disabled={!connected || !ssid}
+              className="px-4 py-2 rounded-lg shadow text-white bg-orange-600 disabled:opacity-50"
+            >
+              Set WiFi
+            </button>
+          </div>
+          <div
+            ref={logRef}
+            className="w-full max-w-2xl h-64 overflow-y-auto rounded-lg bg-gray-900 text-green-400 font-mono text-sm p-3 shadow-inner"
+          >
+            {log.map((l, i) => (
+              <div key={i} className="whitespace-pre-wrap break-words">
+                {l}
+              </div>
+            ))}
+          </div>
+
+          <div className="w-full max-w-2xl flex space-x-2">
+            <input
+              className="flex-grow border rounded-lg p-2 bg-gray-800 text-white placeholder-gray-500 focus:outline-none"
+              type="text"
+              placeholder="Type a command…"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  send();
+                }
+              }}
+              disabled={!connected}
+            />
+            <button
+              onClick={send}
+              disabled={!connected || !input.trim()}
+              className="px-4 py-2 rounded-lg shadow text-white bg-green-600 disabled:opacity-50"
+            >
+              Send
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
