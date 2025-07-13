@@ -1,4 +1,4 @@
-#include <Esp32SerialWifiSetup.h>
+#include <ESP32SerialWiFiSetup.h>
 
 Esp32SerialWifiSetup::WiFiSetupManager wifiSetup;
 
