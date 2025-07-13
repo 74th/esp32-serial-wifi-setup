@@ -50,6 +50,23 @@ void loop() {
 }
 ```
 
+### Web インターフェース
+
+ブラウザからWebUSB Serial APIを使用してWiFi設定を行うことができます：
+
+**🌐 [https://esp32-serial-wifi-setup](https://esp32-serial-wifi-setup) にアクセス**
+
+Webインターフェースの特徴：
+- ブラウザから直接ESP32に接続（WebUSB Serial API使用）
+- WiFi認証情報（SSID/パスワード）の設定
+- リアルタイムでのシリアル通信モニタリング
+- IPアドレスとMACアドレスの取得
+- 追加ソフトウェアのインストール不要
+
+**必要要件:**
+- Chrome/Edge等のWebUSB対応ブラウザ
+- HTTPS接続（必須）
+
 ### JSON-RPC コマンド
 
 シリアルポートに以下のJSON-RPCコマンドを送信してWiFiを設定します：
