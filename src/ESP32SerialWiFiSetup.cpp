@@ -57,7 +57,12 @@ namespace Esp32SerialWifiSetup
     }
 
     uint32_t WiFiSetupManager::readLine(char *buf)
-    {
+   {
+        if (Serial.available() == 0)
+        {
+            return 0;
+        }
+
         int l = Serial.readBytes(&read_line_buf[read_line_buf_pos], sizeof(read_line_buf) - read_line_buf_pos);
         if (l < 0)
         {
