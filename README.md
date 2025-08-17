@@ -39,7 +39,7 @@ lib_deps =
 ### Basic Usage
 
 ```cpp
-#include <Esp32SerialWifiSetup.h>
+#include <Esp32SerialWiFiSetup.h>
 
 Esp32SerialWifiSetup::WiFiSetupManager wifiSetup;
 
